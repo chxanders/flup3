@@ -387,7 +387,7 @@ class FCGIApp(object):
         if self._connect is not None:
             # The simple case. Create a socket and connect to the
             # application.
-            if isinstance(self._connect, types.StringTypes):
+            if isinstance(self._connect, str):
                 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
                 sock.connect(self._connect)
             elif hasattr(socket, 'create_connection'):

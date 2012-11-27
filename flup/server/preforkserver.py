@@ -197,7 +197,7 @@ class PreforkServer(object):
                 self._last_purge = time.time()
 
                 # Try to match it with a child. (Do we need a reverse map?)
-                for pid,d in self._children.items():
+                for pid,d in list(self._children.items()):
                     if child is d['file']:
                         d['file'].close()
                         d['file'] = None
@@ -440,7 +440,7 @@ class PreforkServer(object):
         pass
 
     def _usr1Handler(self, signum, frame):
-        self._children_to_purge = [x['file'] for x in self._children.values()
+        self._children_to_purge = [x['file'] for x in list(self._children.values())
                                    if x['file'] is not None]
 
     def _installSignalHandlers(self):
@@ -471,12 +471,12 @@ if __name__ == '__main__':
             self._sock = sock
             self._addr = addr
         def run(self):
-            print("Client connection opened from %s:%d" % self._addr)
+            print(("Client connection opened from %s:%d" % self._addr))
             self._sock.send('Hello World!\n')
             self._sock.setblocking(1)
             self._sock.recv(1)
             self._sock.close()
-            print("Client connection closed from %s:%d" % self._addr)
+            print(("Client connection closed from %s:%d" % self._addr))
     sock = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind(('', 8080))

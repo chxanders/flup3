@@ -369,6 +369,8 @@ class StdoutWrapper(object):
     def write(self, data):
         if data:
             self.dataWritten = True
+        if type(data) is bytes:
+            data = data.decode('utf-8')
         self._file.write(data)
 
     def writelines(self, lines):
@@ -1071,8 +1073,8 @@ class BaseFCGIServer(object):
 
     def handler(self, req):
         """Special handler for WSGI."""
-        if req.role not in self.roles:
-            return FCGI_UNKNOWN_ROLE, 0
+#        if req.role not in self.roles:
+#            return FCGI_UNKNOWN_ROLE, 0
 
         # Mostly taken from example CGI gateway.
         environ = req.params

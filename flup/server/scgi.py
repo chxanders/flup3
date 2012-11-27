@@ -168,7 +168,7 @@ class WSGIServer(BaseSCGIServer, ThreadedServer):
 if __name__ == '__main__':
     def test_app(environ, start_response):
         """Probably not the most efficient example."""
-        import cgi
+        from . import cgi
         start_response('200 OK', [('Content-Type', 'text/html')])
         yield '<html><head><title>Hello World!</title></head>\n' \
               '<body>\n' \

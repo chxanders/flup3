@@ -153,12 +153,12 @@ if __name__ == '__main__':
             self._sock = sock
             self._addr = addr
         def run(self):
-            print("Client connection opened from %s:%d" % self._addr)
+            print(("Client connection opened from %s:%d" % self._addr))
             self._sock.send('Hello World!\n')
             self._sock.setblocking(1)
             self._sock.recv(1)
             self._sock.close()
-            print("Client connection closed from %s:%d" % self._addr)
+            print(("Client connection closed from %s:%d" % self._addr))
     sock = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind(('', 8080))
